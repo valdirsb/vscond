@@ -29,10 +29,22 @@ export default () => {
             maxWidth: 1280
         }, (response) => {
             if(!response.didCancel) {
+                setPhoto(response.assets[0]);
+            }
+        });
+    }
+
+    const handleAddLibrary = () => {
+        launchImageLibrary({
+            mediaType: 'photo',
+            maxWidth: 1280
+        }, (response) => {
+            if(!response.didCancel) {
                 setPhoto(response);
             }
         });
     }
+
 
     const handleSave = async () => {
         if(description !== '' && where != '' && photo.uri !== '') {

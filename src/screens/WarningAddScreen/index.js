@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { launchCamera } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import C from './style';
 
 import { useStateValue } from '../../contexts/StateContext';
@@ -22,9 +22,31 @@ export default () => {
     }, []);
 
     const handleAddPhoto = async () => {
+
         launchCamera({
             mediaType: 'photo',
-            maxWidth: 2560
+            maxWidth: 1280
+        }, async (response) => {
+            if(!response.didCancel) {
+                setLoading(true);
+                let result = await api.addWarningFile(response);
+                setLoading(false);
+                if(result.error === '') {
+                    let list = [...photoList];
+                    list.push(result.photo);
+                    setPhotoList(list);
+                } else {
+                    alert(result.error);
+                }
+            }
+        });
+    }
+
+    const handleAddLibrary = async () => {
+
+        launchImageLibrary({
+            mediaType: 'photo',
+            maxWidth: 1280
         }, async (response) => {
             if(!response.didCancel) {
                 setLoading(true);
@@ -76,6 +98,12 @@ export default () => {
                         <C.PhotoAddButton onPress={handleAddPhoto}>
                             <Icon name="camera" size={24} color="#000" />
                         </C.PhotoAddButton>
+
+                        <C.PhotoAddButton onPress={handleAddLibrary}>
+                            <Icon name="photo" size={24} color="#000" />
+                        </C.PhotoAddButton>
+
+                        
                         {photoList.map((item, index)=>(
                             <C.PhotoItem key={index}>
                                 <C.Photo source={{uri: item}} />
