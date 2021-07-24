@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const baseUrl = 'http://vscond.vasan.com.br/api';
+const baseUrl = 'https://vscond.vasan.com.br/api';
 
 const request = async (method, endpoint, params, token = null) => {
     method = method.toLowerCase();
@@ -155,7 +155,7 @@ export default {
     },
     removeReservation: async (id) => {
         let token = await AsyncStorage.getItem('token');
-        let json = await request('delete', `/myreservations/${id}`, {}, token);
+        let json = await request('delete', `/myreservation/${id}`, {}, token);
         return json;
     },
     getFoundAndLost: async () => {

@@ -28,6 +28,7 @@ export default {
     `,
     PhotoScroll: styled.ScrollView`
         flex: 1;
+        margin-bottom: 30px;
     `,
     PhotoAddButton: styled.TouchableOpacity`
         width: 65px;
@@ -37,6 +38,7 @@ export default {
         border-width: 1px;
         border-color: #CCC;
         border-radius: 5px;
+        margin-left: 5px;
     `,
     PhotoItem: styled.View`
         width: 65px;
@@ -55,7 +57,7 @@ export default {
     `,
     PhotoRemoveButton: styled.TouchableOpacity``,
     ButtonArea: styled.TouchableOpacity`
-        background-color: #0098DA;
+        background-color: ${props => props.disabled ? "#CCCCCC" : "#0098DA"};
         padding: 12px;
         justify-content: center;
         align-items: center;

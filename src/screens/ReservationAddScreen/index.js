@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import CalendarPicker from 'react-native-calendar-picker';
 import C from './style';
+import moment from "moment";
 
 import { useStateValue } from '../../contexts/StateContext';
 import api from '../../services/api';
@@ -63,36 +64,20 @@ export default () => {
         const result = await api.getDisabledDates(route.params.data.id);
         setLoading(false);
         if(result.error === '') {
-            let dateList = [];
-            for(let i in result.list) {
-                dateList.push( new Date(result.list[i]) );
-            }
-            setDisabledDates(dateList);
+            setDisabledDates(result.list);
         } else {
             alert(result.error);
         }
     }
 
     const handleDateChange = (date) => {
-        let dateEl = new Date(date);
-        let year = dateEl.getFullYear();
-        let month = dateEl.getMonth() + 1;
-        let day = dateEl.getDate();
-
-        month = month < 10 ? '0'+month : month;
-        day = day < 10 ? '0'+day : day;
-        setSelectedDate(`${year}-${month}-${day}`);
+        let dateFormated = moment(date).format("YYYY-MM-DD");
+        setSelectedDate(dateFormated);
     }
 
     const showTextDate = (date) => {
-        let dateEl = new Date(date);
-        let year = dateEl.getFullYear();
-        let month = dateEl.getMonth() + 1;
-        let day = dateEl.getDate();
-
-        month = month < 10 ? '0'+month : month;
-        day = day < 10 ? '0'+day : day;
-        return `${day}/${month}/${year}`;
+        let dateFormated = moment(date).format("DD/MM/YYYY")
+        return dateFormated;
     }
 
     const handleSave = async () => {

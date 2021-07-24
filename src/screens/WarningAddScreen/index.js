@@ -25,7 +25,9 @@ export default () => {
 
         launchCamera({
             mediaType: 'photo',
-            maxWidth: 1280
+            maxHeight: 900,
+            maxWidth: 1200,
+            quality:0.8
         }, async (response) => {
             if(!response.didCancel) {
                 setLoading(true);
@@ -46,7 +48,9 @@ export default () => {
 
         launchImageLibrary({
             mediaType: 'photo',
-            maxWidth: 1280
+            maxHeight: 600,
+            maxWidth: 800,
+            quality:0.7
         }, async (response) => {
             if(!response.didCancel) {
                 setLoading(true);
@@ -73,6 +77,8 @@ export default () => {
         if(warnText !== '') {
             const result = await api.addWarning(warnText, photoList);
             if(result.error === '') {
+                setWarnText('');
+                setPhotoList([]);
                 navigation.navigate('WarningScreen');
             } else {
                 alert(result.error);
@@ -103,6 +109,8 @@ export default () => {
                             <Icon name="photo" size={24} color="#000" />
                         </C.PhotoAddButton>
 
+                    </C.PhotoScroll>
+                    <C.PhotoScroll horizontal={true}>
                         
                         {photoList.map((item, index)=>(
                             <C.PhotoItem key={index}>
@@ -119,7 +127,7 @@ export default () => {
                     <C.LoadingText>Enviando foto. Aguarde.</C.LoadingText>
                 }
 
-                <C.ButtonArea onPress={handleSaveWarn}>
+                <C.ButtonArea disabled={loading?true:false} onPress={handleSaveWarn}>
                     <C.ButtonText>Salvar</C.ButtonText>
                 </C.ButtonArea>
             </C.Scroller>

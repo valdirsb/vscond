@@ -26,7 +26,9 @@ export default () => {
     const handleAddPhoto = () => {
         launchCamera({
             mediaType: 'photo',
-            maxWidth: 1280
+            maxHeight: 900,
+            maxWidth: 1200,
+            quality:0.8
         }, (response) => {
             if(!response.didCancel) {
                 setPhoto(response.assets[0]);
@@ -37,7 +39,9 @@ export default () => {
     const handleAddLibrary = () => {
         launchImageLibrary({
             mediaType: 'photo',
-            maxWidth: 1280
+            maxHeight: 600,
+            maxWidth: 800,
+            quality:0.7
         }, (response) => {
             if(!response.didCancel) {
                 setPhoto(response);
