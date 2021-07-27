@@ -20,7 +20,7 @@ export default () => {
 
     return (
         <C.Container>
-            <C.Titulo>Perfil</C.Titulo>
+            <C.Titulo>Perfil - teste</C.Titulo>
         </C.Container>
     );
 }
