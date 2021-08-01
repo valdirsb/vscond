@@ -62,11 +62,27 @@ PhotoRemoveButton: styled.TouchableOpacity``,
     `,
     Title: styled.Text`        
         color: #000;
-        font-size: 15px;
+        font-size: 18px;
         padding: 10px;
         margin-bottom: 15px;
         align-items: center;
     `,
+    UnitText: styled.Text`        
+    color: #000;
+    font-size: 13px;
+    margin-left: 12px;
+    margin-top: 2px;
+    margin-bottom: 20px;    
+    align-items: center;
+`,
+    CpfText: styled.Text`        
+    color: #000;
+    font-size: 13px;
+    margin-left: 12px;
+    margin-top: 2px;
+    margin-bottom: 20px;    
+    align-items: center;
+`,
     ButtonArea: styled.TouchableOpacity`
         background-color: #0098DA;
         padding: 12px;

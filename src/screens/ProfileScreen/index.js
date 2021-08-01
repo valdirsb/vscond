@@ -72,6 +72,8 @@ export default () => {
     return (
         <C.Container>
             <C.Title>Olá {context.user.user.name}</C.Title>
+            <C.UnitText>{context.user.property.name}</C.UnitText>
+            <C.CpfText>{context.user.cpf}</C.CpfText>
             <C.Image
                 source={require('../../assets/undraw_home.png')}
                 resizeMode="contain"
